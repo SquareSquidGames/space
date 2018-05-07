@@ -7,4 +7,11 @@ class Renderer {
 	this(Node!Wyrm* wyrms) {
 		this.wyrms = wyrms;
 	}
+	
+	void update() {
+		foreach (wyrm; wyrms.iterator) {
+			import std.stdio;
+			wyrm.value.pos.writeln;
+		}
+	}
 }
