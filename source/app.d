@@ -18,4 +18,8 @@ void main() {
 	
 	Renderer renderer = new Renderer(wyrms);
 	
+	while (true) {
+		gameLogic.update;
+		renderer.update;
+	}
 }
