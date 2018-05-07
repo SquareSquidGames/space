@@ -1,4 +1,6 @@
 import std.stdio;
+import core.thread;
+import core.time : msecs;
 
 import cst_;
 import llist.slist;
@@ -19,6 +21,7 @@ void main() {
 	Renderer renderer = new Renderer(wyrms);
 	
 	while (true) {
+		Thread.sleep(msecs(100));
 		gameLogic.update;
 		renderer.update;
 	}
