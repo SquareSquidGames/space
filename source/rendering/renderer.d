@@ -1,9 +1,10 @@
 module rendering.renderer;
+import llist.slist;
 import objects.wyrm;
 
 class Renderer {
-	Wyrm[] wyrms;
-	this(Wyrm[] wyrms) {
+	Node!Wyrm* wyrms;
+	this(Node!Wyrm* wyrms) {
 		this.wyrms = wyrms;
 	}
 }
