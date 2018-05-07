@@ -1,6 +1,7 @@
 import std.stdio;
 
 import cst_;
+import llist.slist;
 
 import game_logic.game_logic;
 import rendering.renderer;
@@ -11,7 +12,7 @@ import objects.wyrm;
 
 
 void main() {
-	Wyrm[] wyrms = new Wyrms[];
+	Node!Wyrm* wyrms = new Node!Wyrm;
 	
 	GameLogic gameLogic = new GameLogic(wyrms);
 	
