@@ -1,0 +1,14 @@
+.dub
+docs.json
+__dummy.html
+docs/
+space.so
+space.dylib
+space.dll
+space.a
+space.lib
+space-test-*
+*.exe
+*.o
+*.obj
+*.lst
