@@ -4,11 +4,17 @@ import llist.slist;
 import objects.world;
 import game_events.game_event;
 
+import dsdl2.window;
+
 class IoManager {
 	World world;
 	
+	Window window;
+	
 	this(World world) {
 		this.world = world;
+		
+		window = new Window("Window!!!", [256,192]);
 	}
 	
 	void render() {
