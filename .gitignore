@@ -2,7 +2,12 @@
 docs.json
 __dummy.html
 docs/
-/built/
+built/space.so
+built/space.dylib
+built/space.dll
+built/space.a
+built/space.lib
+built/space-test-*
 *.exe
 *.o
 *.obj
