@@ -6,7 +6,8 @@ import cst_;
 import llist.slist;
 
 import game_logic.game_logic;
-import io.io_manager;
+import io.renderer;
+import io.input_handler;
 import objects.world;
 
 
@@ -17,12 +18,13 @@ void main() {
 	World world = new World;
 	
 	GameLogic gameLogic = new GameLogic(world);
-	IoManager ioManager = new IoManager(world);
+	Renderer renderer = new Renderer(world);
+	InputHandler inputHandler = new InputHandler(renderer);
 	
 	while (true) {
 		Thread.sleep(msecs(100));
-		auto gameEvents = ioManager.handleInput;
+		auto gameEvents = inputHandler.handleInput;
 		gameLogic.update(gameEvents);
-		ioManager.render;
+		renderer.render;
 	}
 }
