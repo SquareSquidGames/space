@@ -8,9 +8,11 @@ import io.renderer;
 import game_events.game_event;
 
 class InputHandler {
+	Renderer renderer;
 	EventQueue	eventQueue;
 		
 	this(Renderer renderer) {
+		this.renderer = renderer;
 		eventQueue	= new EventQueue;
 	}
 
@@ -29,6 +31,9 @@ class InputHandler {
 				with (event.window) {
 					if (type == Type.CLOSE) {
 						"WindowClose".writeln;
+					}
+					if (type == Type.RESIZED) {
+						renderer.resize(size);
 					}
 				}
 			}
