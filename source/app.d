@@ -6,7 +6,7 @@ import cst_;
 import llist.slist;
 
 import game_logic.game_logic;
-import rendering.renderer;
+import io.io_manager;
 import objects.wyrm;
 
 
@@ -18,11 +18,12 @@ void main() {
 	
 	GameLogic gameLogic = new GameLogic(wyrms);
 	
-	Renderer renderer = new Renderer(wyrms);
+	IoManager ioManager = new IoManager(wyrms);
 	
 	while (true) {
 		Thread.sleep(msecs(100));
-		gameLogic.update;
-		renderer.update;
+		auto gameEvents = ioManager.handleInput;
+		gameLogic.update(gameEvents);
+		ioManager.render;
 	}
 }
