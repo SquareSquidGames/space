@@ -7,18 +7,17 @@ import llist.slist;
 
 import game_logic.game_logic;
 import io.io_manager;
-import objects.wyrm;
+import objects.world;
 
 
 
 
 
 void main() {
-	Node!Wyrm* wyrms = new Node!Wyrm;
+	World world = new World;
 	
-	GameLogic gameLogic = new GameLogic(wyrms);
-	
-	IoManager ioManager = new IoManager(wyrms);
+	GameLogic gameLogic = new GameLogic(world);
+	IoManager ioManager = new IoManager(world);
 	
 	while (true) {
 		Thread.sleep(msecs(100));
