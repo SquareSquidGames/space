@@ -12,3 +12,5 @@ space-test-*
 *.o
 *.obj
 *.lst
+
+\.vs/
