@@ -1,6 +1,7 @@
-module objects.wyrm;
+module objects.ship;
 
-class Wyrm{
+class Ship{
 	float[2] pos = [0,0];
 	float rot = 0;
 }
+
