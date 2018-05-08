@@ -9,5 +9,5 @@ import objects.ship	;
 class World {
 	PlayerShip playerShip;
 	
-	Node!Ship ships;
+	Node!Ship* ships;
 }
