@@ -1,29 +1,23 @@
+/**	Events that are from the input manager to the game logic.
+*/
 module game_events.game_event;
 
 enum EventType: ubyte {
-	wyrmRotate,
-	wyrmThrust,
-	wyrmWarp,
+	thrust,
+	torque,
 }
 
 struct GameEvent {
 	EventType type;
 	union {
-		WyrmRotate wyrmRotate;
-		WyrmThrust wyrmThrust;
-		WyrmWarp wyrmWarp;
+		ThrustEvent thrust;
+		TorqueEvent torque;
 	}
 }
 
-struct WyrmRotate {
-	ubyte playerNum;
-	float torque;
-}
-struct WyrmThrust {
-	ubyte playerNum;
+struct ThrustEvent {
 	float thrust;
 }
-struct WyrmWarp {
-	ubyte playerNum;
-	
+struct TorqueEvent {
+	float torque;
 }

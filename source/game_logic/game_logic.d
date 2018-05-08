@@ -1,33 +1,29 @@
 module game_logic.game_logic;
+
 import llist.slist;
-import objects.wyrm;
+import objects.world;
 import game_events.game_event;
 
 class GameLogic {
-	Node!Wyrm* wyrms;
-	this(Node!Wyrm* wyrms) {
-		this.wyrms = wyrms;
-		wyrms.append(new Wyrm);
+	World world;
+	this(World world) {
+		this.world = world;
 	}
 	
 	void update(GameEvent[] gameEvents) {
 		foreach (event; gameEvents) {
-			if (event.type == EventType.wyrmRotate) {
-				Node!Wyrm* wyrmNode = wyrms;
-				foreach (_; 0..event.wyrmRotate.playerNum) {
-					wyrmNode = wyrmNode.next;
-				}
-				wyrmNode.value.rot += event.wyrmRotate.torque;
+			if (event.type == EventType.thrust) {
 			}
-			else if (event.type == EventType.wyrmThrust) {
-				
-			}
-			else if (event.type == EventType.wyrmWarp) {
-				
+			else if (event.type == EventType.torque) {
+				////Node!Wyrm* wyrmNode = wyrms;
+				////foreach (_; 0..event.wyrmRotate.playerNum) {
+				////	wyrmNode = wyrmNode.next;
+				////}
+				////wyrmNode.value.rot += event.wyrmRotate.torque;
 			}
 		}
-		foreach (wyrmNode; wyrms.iterator) {
-			////wyrmNode.value.pos[0]++;
-		}
+		////foreach (wyrmNode; wyrms.iterator) {
+		////	////wyrmNode.value.pos[0]++;
+		////}
 	}
 }
