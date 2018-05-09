@@ -21,6 +21,8 @@ private {
 		
 		uniform mat4 projection;
 		uniform vec2 pos = vec2(0,0);
+		uniform mat2 rot;
+		uniform vec2 scale;
 
 		layout (location = 0) in vec3 inPos;
 		layout (location = 1) in vec3 inColor;
@@ -30,7 +32,7 @@ private {
 		void main() {
 			////gl_Position = vec4(inPos, 1.0);
 			////gl_Position = vec4(inPos.xy+pos,inPos.z, 1.0);
-			gl_Position = projection*vec4(inPos.xy+pos,inPos.z, 1.0);
+			gl_Position = projection*vec4((rot*inPos.xy*scale)+pos,inPos.z, 1.0);
 			vertColor = inColor;
 		}";
 
@@ -52,6 +54,11 @@ float[4][4] orthoProjection(float[2] size, float nearPlane, float farPlane) {
 		[0f	,0f	,-2f/(farPlane-nearPlane)	,0f	],
 		[0f	,0f	,-(farPlane+nearPlane)/(farPlane-nearPlane)	,1f	]];
 }
+float[2][2] rotationMatrix(float angle) {
+	import std.math;
+	return [	[cos(angle)	,-sin(angle)	],
+		[sin(angle)	,cos(angle)	]];
+}
 
 
 class Renderer {
@@ -65,11 +72,12 @@ class Renderer {
 	Program program;
 	int uniformLoc_projection;
 	int uniformLoc_pos;
+	int uniformLoc_rot;
+	int uniformLoc_scale;
 	float[4][4] projection;
 
-	ArrayBuffer objectVerts;
-	ArrayBuffer objectCols;
-	VertexArray object;
+	VertexArray playerShip;
+	VertexArray ship;
 
 	this(World world) {
 		this.world = world;
@@ -99,31 +107,52 @@ class Renderer {
 		program.use;
 		uniformLoc_projection	= program.getUniform("projection");
 		uniformLoc_pos	= program.getUniform("pos");
+		uniformLoc_rot	= program.getUniform("rot");
+		uniformLoc_scale	= program.getUniform("scale");
 		
 
-
-		float[3][] vertices = [
-			[	-0.1	, -0.1	, 0.0f	]	,
-			[	0.1	, -0.1	, 0.0f	]	,
-			[	0.0	, 0.1	, 0.0f	]	,
-		];
-		float[3][] colors = [
-			[	1	, 0	, 0	]	,
-			[	0	, 1	, 0	]	,
-			[	0	, 0	, 1	]	,
-		];
-		object.gen;
-		object.bind;
-		object.enableAttribute(0);
-		object.enableAttribute(1);
-		objectVerts.gen;
-		objectVerts.bind;
-		objectVerts.data(vertices, BufferUsage.StaticDraw);
-		object.attributePointer(0, objectVerts, 3, DataType.Float);
-		objectCols.gen;
-		objectCols.bind;
-		objectCols.data(colors, BufferUsage.StaticDraw);
-		object.attributePointer(1, objectCols, 3, DataType.Float);
+		{
+			float[3][] vertices = [
+				[	-0.25	, -0.25	, 0.0f	]	,
+				[	0.25	, -0.25	, 0.0f	]	,
+				[	0.0	, 0.25	, 0.0f	]	,
+			];
+			float[3][] colors = [
+				[	1	, 0	, 0	]	,
+				[	0	, 1	, 0	]	,
+				[	0	, 0	, 1	]	,
+			];
+			ship.gen;
+			ship.bind;
+			ship.enableAttribute(0);
+			ship.enableAttribute(1);
+			ship.attributePointer(0, ArrayBuffer(vertices, BufferUsage.StaticDraw), 3, DataType.Float);
+			ship.attributePointer(1, ArrayBuffer(colors, BufferUsage.StaticDraw), 3, DataType.Float);
+		}
+		{
+			float[3][] vertices = [
+				[	-0.5	, -0.5	, 0.0f	]	,
+				[	0.5	, -0.5	, 0.0f	]	,
+				[	0.0	, 0.5	, 0.0f	]	,
+				[	-0.5	, -0.5	, 0.0f	]	,
+				[	0.5	, -0.5	, 0.0f	]	,
+				[	0.0	, -1	, 0.0f	]	,
+			];
+			float[3][] colors = [
+				[	1	, 0	, 0	]	,
+				[	0	, 1	, 0	]	,
+				[	0	, 0	, 1	]	,
+				[	1	, 0	, 0	]	,
+				[	0	, 1	, 0	]	,
+				[	0	, 0	, 1	]	,
+			];
+			playerShip.gen;
+			playerShip.bind;
+			playerShip.enableAttribute(0);
+			playerShip.enableAttribute(1);
+			playerShip.attributePointer(0, ArrayBuffer(vertices, BufferUsage.StaticDraw), 3, DataType.Float);
+			playerShip.attributePointer(1, ArrayBuffer(colors, BufferUsage.StaticDraw), 3, DataType.Float);
+		}
 	}
 	
 	void resize(int[2] size) {
@@ -137,12 +166,24 @@ class Renderer {
 
 	void render() {
 		program.use;
+		program.uniformVector(uniformLoc_scale, [0.1f,0.1]);
 		
 		program.uniformMatrix!(float,4,4)(uniformLoc_projection, projection);
-		program.uniformVector(uniformLoc_pos, [0f,0f]);
 		
-		object.bind;
-		object.draw(Primitive.Triangles, 3);
+		foreach(shipNode; world.ships.iterator) {
+			float[2] rPos = shipNode.payload.pos[]/4;
+			program.uniformVector(uniformLoc_pos, rPos);
+			program.uniformMatrix!(float,2,2)(uniformLoc_rot, rotationMatrix(shipNode.payload.rot));
+		
+			ship.bind;
+			ship.draw(Primitive.Triangles, 3);
+		}
+		program.uniformVector(uniformLoc_pos, [0f,0]);
+		program.uniformMatrix!(float,2,2)(uniformLoc_rot, rotationMatrix(world.playerShip.rot));
+
+		playerShip.bind;
+		playerShip.draw(Primitive.Triangles, 6);
+		
 
 		context.flip();
 	}
