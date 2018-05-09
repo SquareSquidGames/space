@@ -1,17 +1,15 @@
 {
 	"fileVersion": 1,
 	"versions": {
-		"clay-sdl": "~master",
 		"cst": "1.0.4",
 		"derelict-gl3": "2.0.0-beta.6",
 		"derelict-sdl2": "3.1.0-alpha.3",
 		"derelict-util": "3.0.0-beta.2",
-		"dsdl2": "~master",
 		"gl-context": "~master",
-		"gl-with-types": "1.0.0-alpha.1",
+		"gl-with-types": "1.0.0-alpha.3",
 		"llist": "2.0.0",
-		"polar-rect-math": "~master",
-		"tau": "1.0.0",
+		"polar-rect-math": "1.0.0-beta.0",
+		"tau": "1.0.1",
 		"xyz": "1.1.0"
 	}
 }
