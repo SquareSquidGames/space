@@ -10,4 +10,9 @@ class World {
 	PlayerShip playerShip;
 	
 	Node!Ship* ships;
+	
+	this() {
+		playerShip = new PlayerShip;
+		ships = new Node!Ship;
+	}
 }
