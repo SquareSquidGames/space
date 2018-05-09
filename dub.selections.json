@@ -10,6 +10,7 @@
 		"gl-context": "~master",
 		"gl-with-types": "1.0.0-alpha.1",
 		"llist": "2.0.0",
+		"polar-rect-math": "~master",
 		"tau": "1.0.0",
 		"xyz": "1.1.0"
 	}
