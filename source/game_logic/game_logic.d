@@ -20,13 +20,11 @@ class GameLogic {
 			if (event.type == EventType.thrust) {
 			}
 			else if (event.type == EventType.torque) {
-				////Node!Wyrm* wyrmNode = wyrms;
-				////foreach (_; 0..event.wyrmRotate.playerNum) {
-				////	wyrmNode = wyrmNode.next;
-				////}
-				////wyrmNode.value.rot += event.wyrmRotate.torque;
+				world.playerShip.torque+=event.torque.torque/20*TAU;
 			}
 		}
+		
+		world.playerShip.rot += world.playerShip.torque;
 		////foreach (wyrmNode; wyrms.iterator) {
 		////	////wyrmNode.value.pos[0]++;
 		////}
