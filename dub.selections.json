@@ -5,7 +5,6 @@
 		"derelict-gl3": "2.0.0-beta.6",
 		"derelict-sdl2": "3.1.0-alpha.3",
 		"derelict-util": "3.0.0-beta.2",
-		"gl-context": "~master",
 		"gl-with-types": "1.0.0-alpha.3",
 		"llist": "2.0.0",
 		"polar-rect-math": "1.0.0-beta.0",

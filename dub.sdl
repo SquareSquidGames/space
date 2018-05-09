@@ -4,13 +4,91 @@ authors "user"
 copyright "Copyright © 2018, user"
 targetPath "built"
 license "proprietary"
-dependency "derelict-gl3" version="~>2.0.0-beta.6"
-dependency "derelict-sdl2" version="~>3.1.0-alpha.3"
-dependency "cst" version="~>1.0.4"
-dependency "gl-with-types" version="~>1.0.0-alpha"
-dependency "clay-sdl:window" version="*"
-dependency "clay-sdl:event" version="*"
-dependency "llist" version="~>2.0.0"
-dependency	"gl-context"	version="~master"
-dependency	"polar-rect-math"	version="~>1.0.0-beta.0"
-dependency	"tau"	version="~>1.0.0"
+
+
+dependency	":objects"	version="*"
+dependency	":game_events"	version="*"
+dependency	":game_logic"	version="*"
+////dependency	":io"	version="*"
+dependency	":debug_io"	version="*"
+
+
+subPackage {
+	name	"objects"
+	targetType	"library"
+	targetPath	"built"
+	sourcePaths	"libraries/objects"
+	importPaths	"libraries/objects"
+	
+	dependency	"cst"	version="~>1.0.4"
+	dependency	"llist"	version="~>2.0.0"
+			
+	dependency	"polar-rect-math"	version="~>1.0.0-beta.0"
+	dependency	"tau"	version="~>1.0.0"
+}
+subPackage {
+	name	"game_events"
+	targetType	"library"
+	targetPath	"built"
+	sourcePaths	"libraries/game_events"
+	importPaths	"libraries/game_events"
+	
+	dependency	"cst"	version="~>1.0.4"
+	dependency	"llist"	version="~>2.0.0"
+}
+subPackage {
+	name	"game_logic"
+	targetType	"library"
+	targetPath	"built"
+	sourcePaths	"libraries/game_logic"
+	importPaths	"libraries/game_logic"
+	
+	dependency	"space:objects"	version="*"
+	dependency	"space:game_events"	version="*"
+			
+	dependency	"derelict-gl3"	version="~>2.0.0-beta.6"
+	dependency	"cst"	version="~>1.0.4"
+	dependency	"llist"	version="~>2.0.0"
+			
+	dependency	"polar-rect-math"	version="~>1.0.0-beta.0"
+	dependency	"tau"	version="~>1.0.0"
+}
+subPackage {
+	name	"io"
+	targetType	"library"
+	targetPath	"built"
+	sourcePaths	"libraries/io"
+	importPaths	"libraries/io"
+	
+	dependency	"space:objects"	version="*"
+	dependency	"space:game_events"	version="*"
+			
+	dependency	"cst"	version="~>1.0.4"
+	dependency	"llist"	version="~>2.0.0"
+			
+	dependency	"polar-rect-math"	version="~>1.0.0-beta.0"
+	dependency	"tau"	version="~>1.0.0"
+	
+	dependency	"derelict-gl3"	version="~>2.0.0-beta.6"
+	dependency	"derelict-sdl2"	version="~>3.1.0-alpha.3"
+	dependency	"clay-sdl:window"	version="*"
+	dependency	"clay-sdl:event"	version="*"
+	dependency	"gl-context"	version="~master"
+	dependency	"gl-with-types"	version="~>1.0.0-alpha"
+}
+subPackage {
+	name	"debug_io"
+	targetType	"library"
+	targetPath	"built"
+	sourcePaths	"libraries/debug_io"
+	importPaths	"libraries/debug_io"
+	
+	dependency	"space:objects"	version="*"
+	dependency	"space:game_events"	version="*"
+			
+	dependency	"cst"	version="~>1.0.4"
+	dependency	"llist"	version="~>2.0.0"
+			
+	dependency	"polar-rect-math"	version="~>1.0.0-beta.0"
+	dependency	"tau"	version="~>1.0.0"
+}
