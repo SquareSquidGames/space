@@ -9,6 +9,7 @@ import glwt.draw;
 import glwt.shader;
 import glwt.program;
 import glwt.viewport;
+import glwt.clear;
 import gl_context;
 
 import llist.slist;
@@ -165,6 +166,8 @@ class Renderer {
 	}
 
 	void render() {
+		clear;
+		
 		program.use;
 		program.uniformVector(uniformLoc_scale, [0.1f,0.1]);
 		
