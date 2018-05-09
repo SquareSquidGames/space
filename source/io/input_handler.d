@@ -40,7 +40,7 @@ class InputHandler {
 						GameEvent gameEvent;
 						{
 							gameEvent.type = EventType.torque;
-							gameEvent.torque.torque = -1;
+							gameEvent.torque.torque = 1;
 						}
 						gameEvents ~= gameEvent;
 					}
@@ -48,7 +48,7 @@ class InputHandler {
 						GameEvent gameEvent;
 						{
 							gameEvent.type = EventType.torque;
-							gameEvent.torque.torque = 1;
+							gameEvent.torque.torque = -1;
 						}
 						gameEvents ~= gameEvent;
 					}

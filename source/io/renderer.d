@@ -57,8 +57,8 @@ float[4][4] orthoProjection(float[2] size, float nearPlane, float farPlane) {
 }
 float[2][2] rotationMatrix(float angle) {
 	import std.math;
-	return [	[cos(angle)	,-sin(angle)	],
-		[sin(angle)	,cos(angle)	]];
+	return [	[cos(angle)	,sin(angle)	],
+		[-sin(angle)	,cos(angle)	]];
 }
 
 
