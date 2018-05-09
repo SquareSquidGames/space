@@ -174,7 +174,7 @@ class Renderer {
 		program.uniformMatrix!(float,4,4)(uniformLoc_projection, projection);
 		
 		foreach(shipNode; world.ships.iterator) {
-			float[2] rPos = shipNode.payload.pos[]/4;
+			float[2] rPos = (shipNode.payload.pos[] - world.playerShip.pos[]) /4;
 			program.uniformVector(uniformLoc_pos, rPos);
 			program.uniformMatrix!(float,2,2)(uniformLoc_rot, rotationMatrix(shipNode.payload.rot));
 		
