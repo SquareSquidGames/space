@@ -9,6 +9,10 @@ import math.polar_rect;
 
 class GameLogic {
 	World world;
+	
+	float inputThrust=0;
+	float inputTorque=0;
+	
 	this(World world) {
 		this.world = world;
 		world.ships.append(new Ship([0,-3],0));
@@ -19,12 +23,15 @@ class GameLogic {
 	void update(GameEvent[] gameEvents, float timeDelta) {
 		foreach (event; gameEvents) {
 			if (event.type == EventType.thrust) {
-				world.playerShip.velocity[]+=getRect(event.thrust.thrust/20,world.playerShip.rot)[];
+				inputThrust = event.thrust.thrust;
 			}
 			else if (event.type == EventType.torque) {
-				world.playerShip.torque+=event.torque.torque/20*TAU;
+				inputTorque = event.torque.torque;
 			}
 		}
+
+		world.playerShip.velocity[]	+=getRect(inputThrust/20,world.playerShip.rot)[];
+		world.playerShip.torque	+=inputTorque/20*TAU;
 		
 		world.playerShip.rot += world.playerShip.torque*timeDelta;
 		world.playerShip.pos[] += world.playerShip.velocity[]*timeDelta;

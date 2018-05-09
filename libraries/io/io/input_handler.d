@@ -11,6 +11,9 @@ import game_events.game_event;
 class InputHandler {
 	Renderer renderer;
 	EventQueue	eventQueue;
+	
+	struct KeysDown {	bool up;	bool down;	bool left;	bool right;	}
+	KeysDown keysDown;
 		
 	this(Renderer renderer) {
 		this.renderer = renderer;
@@ -36,35 +39,38 @@ class InputHandler {
 			}
 			else if (event.type == event.Type.KEY_DOWN) {
 				with (event.key) {
+					bool thrustChanged	= false;
+					bool torgueChanged	= false;
 					if (keycode == Keycode.LEFT) {
-						GameEvent gameEvent;
-						{
-							gameEvent.type = EventType.torque;
-							gameEvent.torque.torque = 1;
-						}
-						gameEvents ~= gameEvent;
+						keysDown.left	= true;
+						torqudChanged	= true;
 					}
 					else if (keycode == Keycode.RIGHT) {
+						keysDown.right	= true;
+						torqueChanged	= true;
+					}
+					else if (keycode == Keycode.UP) {
+						keysDown.up	= true;
+						thrustChanged	= true;
+					}
+					else if (keycode == Keycode.DOWN) {
+						keysDown.down	= true;
+						thustChanged	= true;
+					}
+					
+					if (torqueChanged) {
 						GameEvent gameEvent;
 						{
 							gameEvent.type = EventType.torque;
-							gameEvent.torque.torque = -1;
+							gameEvent.torque.torque = keyDown.right-keysDown.left;
 						}
 						gameEvents ~= gameEvent;
 					}
-					else if (keycode == Keycode.UP) {
+					if (torqueChanged) {
 						GameEvent gameEvent;
 						{
 							gameEvent.type = EventType.thrust;
-							gameEvent.thrust.thrust = 1;
-						}
-						gameEvents ~= gameEvent;
-					}
-					else if (keycode == Keycode.DOWN) {
-						GameEvent gameEvent;
-						{
-							gameEvent.type = EventType.thrust;
-							gameEvent.thrust.thrust = -1;
+							gameEvent.thrust.thrust = keyDown.up-keysDown.down;
 						}
 						gameEvents ~= gameEvent;
 					}
