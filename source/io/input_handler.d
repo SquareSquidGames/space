@@ -3,6 +3,7 @@ module io.input_handler;
 import std.stdio;
 
 import clay_sdl.event;
+import math.tau;
 
 import io.renderer;
 import game_events.game_event;
@@ -17,11 +18,7 @@ class InputHandler {
 	}
 
 	GameEvent[] handleInput() {
-		GameEvent gameEvent;
-		{
-			gameEvent.type = EventType.thrust;
-			gameEvent.thrust.thrust = -3;
-		}
+		GameEvent[] gameEvents;
 
 		foreach (event; eventQueue) {
 			if (event.type == event.Type.QUIT) {
@@ -37,8 +34,28 @@ class InputHandler {
 					}
 				}
 			}
+			else if (event.type == event.Type.KEY_DOWN) {
+				with (event.key) {
+					if (keycode == Keycode.LEFT) {
+						GameEvent gameEvent;
+						{
+							gameEvent.type = EventType.torque;
+							gameEvent.torque.torque = -1;
+						}
+						gameEvents ~= gameEvent;
+					}
+					else if (keycode == Keycode.RIGHT) {
+						GameEvent gameEvent;
+						{
+							gameEvent.type = EventType.torque;
+							gameEvent.torque.torque = 1;
+						}
+						gameEvents ~= gameEvent;
+					}
+				}
+			}
 		}
 		
-		return [gameEvent];
+		return gameEvents;
 	}
 }
