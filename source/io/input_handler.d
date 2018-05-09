@@ -52,6 +52,22 @@ class InputHandler {
 						}
 						gameEvents ~= gameEvent;
 					}
+					else if (keycode == Keycode.UP) {
+						GameEvent gameEvent;
+						{
+							gameEvent.type = EventType.thrust;
+							gameEvent.thrust.thrust = 1;
+						}
+						gameEvents ~= gameEvent;
+					}
+					else if (keycode == Keycode.DOWN) {
+						GameEvent gameEvent;
+						{
+							gameEvent.type = EventType.thrust;
+							gameEvent.thrust.thrust = -1;
+						}
+						gameEvents ~= gameEvent;
+					}
 				}
 			}
 		}
