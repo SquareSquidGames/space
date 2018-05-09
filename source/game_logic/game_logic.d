@@ -24,7 +24,8 @@ class GameLogic {
 			}
 		}
 		
-		world.playerShip.rot += world.playerShip.torque;
+		world.playerShip.rot += world.playerShip.torque*timeDelta;
+		world.playerShip.pos[] += world.playerShip.velocity[]*timeDelta;
 		////foreach (wyrmNode; wyrms.iterator) {
 		////	////wyrmNode.value.pos[0]++;
 		////}
