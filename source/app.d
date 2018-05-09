@@ -24,7 +24,7 @@ void main() {
 	while (true) {
 		Thread.sleep(msecs(100));
 		auto gameEvents = inputHandler.handleInput;
-		gameLogic.update(gameEvents);
+		gameLogic.update(gameEvents, 0.1);
 		renderer.render;
 	}
 }

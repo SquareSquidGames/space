@@ -15,7 +15,7 @@ class GameLogic {
 		world.ships.insertAfter(new Ship([-2,1],0.1*TAU));
 	}
 	
-	void update(GameEvent[] gameEvents) {
+	void update(GameEvent[] gameEvents, float timeDelta) {
 		foreach (event; gameEvents) {
 			if (event.type == EventType.thrust) {
 			}
