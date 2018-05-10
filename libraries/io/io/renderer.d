@@ -79,6 +79,7 @@ class Renderer {
 
 	VertexArray playerShip;
 	VertexArray playerGun;
+	VertexArray bullet;
 	VertexArray ship;
 
 	this(World world) {
@@ -174,6 +175,25 @@ class Renderer {
 			ship.enableAttribute(1);
 			ship.attributePointer(0, ArrayBuffer(vertices, BufferUsage.StaticDraw), 3, DataType.Float);
 			ship.attributePointer(1, ArrayBuffer(colors, BufferUsage.StaticDraw), 3, DataType.Float);
+		}
+		//---bullet
+		{
+			float[3][] vertices = [
+				[	-0.1	,  0.1	, 0.0f	]	,
+				[	-0.1	, -0.1	, 0.0f	]	,
+				[	 0.1	,  0.0	, 0.0f	]	,
+			];
+			float[3][] colors = [
+				[	1	, 1	, 1	]	,
+				[	0	, 1	, 0	]	,
+				[	0	, 0	, 1	]	,
+			];
+			bullet.gen;
+			bullet.bind;
+			bullet.enableAttribute(0);
+			bullet.enableAttribute(1);
+			bullet.attributePointer(0, ArrayBuffer(vertices, BufferUsage.StaticDraw), 3, DataType.Float);
+			bullet.attributePointer(1, ArrayBuffer(colors, BufferUsage.StaticDraw), 3, DataType.Float);
 		}
 	}
 	
