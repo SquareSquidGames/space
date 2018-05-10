@@ -34,7 +34,7 @@ class GameLogic {
 			}
 			else if (event.type == EventType.fire) {
 				float[2] mov;
-				mov = world.playerShip.velocity[] + getRect(0.1f,world.playerShip.gunDirection)[];
+				mov = world.playerShip.velocity[] + getRect(2f,world.playerShip.gunDirection)[];
 				auto node = world.bullets;
 				while (node.next!=null)
 					node=node.next;
@@ -47,8 +47,9 @@ class GameLogic {
 		
 		world.playerShip.rot += world.playerShip.torque*timeDelta;
 		world.playerShip.pos[] += world.playerShip.velocity[]*timeDelta;
-		////foreach (wyrmNode; wyrms.iterator) {
-		////	////wyrmNode.value.pos[0]++;
-		////}
+		
+		foreach (bulletNode; world.bullets.iterator) {
+			bulletNode.value.pos[] += bulletNode.value.velocity[]*timeDelta;
+		}
 	}
 }
