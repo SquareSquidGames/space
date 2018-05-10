@@ -222,6 +222,14 @@ class Renderer {
 			ship.bind;
 			ship.draw(Primitive.Triangles, 3);
 		}
+		foreach(bulletNode; world.bullets.iterator) {
+			float[2] rPos = (bulletNode.payload.pos[] - world.playerShip.pos[]) /4;
+			program.uniformVector(uniformLoc_pos, rPos);
+			program.uniformMatrix!(float,2,2)(uniformLoc_rot, rotationMatrix(bulletNode.payload.rot));
+
+			bullet.bind;
+			bullet.draw(Primitive.Triangles, 3);
+		}
 		program.uniformVector(uniformLoc_pos, [0f,0]);
 		program.uniformMatrix!(float,2,2)(uniformLoc_rot, rotationMatrix(world.playerShip.rot));
 		playerShip.bind;
