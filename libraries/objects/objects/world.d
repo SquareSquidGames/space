@@ -12,11 +12,11 @@ class World {
 	
 	Node!Ship* ships;
 
-	Node!Bullet* bullet;
+	Node!Bullet* bullets;
 	
 	this() {
 		playerShip = new PlayerShip;
 		ships = new Node!Ship;
-		bullet = new Node!Bullet;
+		bullets = new Node!Bullet;
 	}
 }
