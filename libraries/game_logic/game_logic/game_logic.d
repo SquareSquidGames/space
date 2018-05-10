@@ -33,8 +33,7 @@ class GameLogic {
 				world.playerShip.gunDirection += event.rotateGun.angle*timeDelta;
 			}
 			else if (event.type == EventType.fire) {
-				float[2] mov;
-				mov = world.playerShip.velocity[] + getRect(2f,world.playerShip.gunDirection)[];
+				float[2] mov = world.playerShip.velocity[] + getRect(2f,world.playerShip.gunDirection)[];
 				auto node = world.bullets;
 				while (node.next!=null)
 					node=node.next;
