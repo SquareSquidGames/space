@@ -7,4 +7,6 @@ class PlayerShip{
 	float	rot	= 0;
 	float[2]	velocity	= [0,0];
 	float	torque	= 0;
+
+	float	gunDirection	= 0;
 }

@@ -28,6 +28,9 @@ class GameLogic {
 			else if (event.type == EventType.torque) {
 				inputTorque = event.torque.torque;
 			}
+			else if (event.type == EventType.rotateGun) {
+				world.playerShip.gunDirection += event.rotateGun.angle*timeDelta;
+			}
 		}
 
 		world.playerShip.velocity[]	+=getRect(inputThrust/15,world.playerShip.rot)[];

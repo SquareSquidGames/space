@@ -78,6 +78,7 @@ class Renderer {
 	float[4][4] projection;
 
 	VertexArray playerShip;
+	VertexArray playerGun;
 	VertexArray ship;
 
 	this(World world) {
@@ -111,25 +112,7 @@ class Renderer {
 		uniformLoc_rot	= program.getUniform("rot");
 		uniformLoc_scale	= program.getUniform("scale");
 		
-
-		{
-			float[3][] vertices = [
-				[	-0.25	,  0.25	, 0.0f	]	,
-				[	-0.25	, -0.25	, 0.0f	]	,
-				[	 0.25	,  0.0	, 0.0f	]	,
-			];
-			float[3][] colors = [
-				[	1	, 0	, 0	]	,
-				[	0	, 1	, 0	]	,
-				[	0	, 0	, 1	]	,
-			];
-			ship.gen;
-			ship.bind;
-			ship.enableAttribute(0);
-			ship.enableAttribute(1);
-			ship.attributePointer(0, ArrayBuffer(vertices, BufferUsage.StaticDraw), 3, DataType.Float);
-			ship.attributePointer(1, ArrayBuffer(colors, BufferUsage.StaticDraw), 3, DataType.Float);
-		}
+		//---playerShip
 		{
 			float[3][] vertices = [
 				[	-0.5	,  0.5	, 0.0f	]	,
@@ -153,6 +136,44 @@ class Renderer {
 			playerShip.enableAttribute(1);
 			playerShip.attributePointer(0, ArrayBuffer(vertices, BufferUsage.StaticDraw), 3, DataType.Float);
 			playerShip.attributePointer(1, ArrayBuffer(colors, BufferUsage.StaticDraw), 3, DataType.Float);
+		}
+		//---playerGun
+		{
+			float[3][] vertices = [
+				[	-0.2	,  0.2	, 0.0f	]	,
+				[	-0.2	, -0.2	, 0.0f	]	,
+				[	 1	,  0.0	, 0.0f	]	,
+			];
+			float[3][] colors = [
+				[	0.5	, 0.2	, 0.2	]	,
+				[	0.2	, 0.5	, 0.2	]	,
+				[	0.2	, 0.2	, 0.5	]	,
+			];
+			playerGun.gen;
+			playerGun.bind;
+			playerGun.enableAttribute(0);
+			playerGun.enableAttribute(1);
+			playerGun.attributePointer(0, ArrayBuffer(vertices, BufferUsage.StaticDraw), 3, DataType.Float);
+			playerGun.attributePointer(1, ArrayBuffer(colors, BufferUsage.StaticDraw), 3, DataType.Float);
+		}
+		//---ship
+		{
+			float[3][] vertices = [
+				[	-0.25	,  0.25	, 0.0f	]	,
+				[	-0.25	, -0.25	, 0.0f	]	,
+				[	 0.25	,  0.0	, 0.0f	]	,
+			];
+			float[3][] colors = [
+				[	1	, 0	, 0	]	,
+				[	0	, 1	, 0	]	,
+				[	0	, 0	, 1	]	,
+			];
+			ship.gen;
+			ship.bind;
+			ship.enableAttribute(0);
+			ship.enableAttribute(1);
+			ship.attributePointer(0, ArrayBuffer(vertices, BufferUsage.StaticDraw), 3, DataType.Float);
+			ship.attributePointer(1, ArrayBuffer(colors, BufferUsage.StaticDraw), 3, DataType.Float);
 		}
 	}
 	
@@ -183,9 +204,12 @@ class Renderer {
 		}
 		program.uniformVector(uniformLoc_pos, [0f,0]);
 		program.uniformMatrix!(float,2,2)(uniformLoc_rot, rotationMatrix(world.playerShip.rot));
-
 		playerShip.bind;
 		playerShip.draw(Primitive.Triangles, 6);
+		
+		program.uniformMatrix!(float,2,2)(uniformLoc_rot, rotationMatrix(world.playerShip.gunDirection));
+		playerGun.bind;
+		playerGun.draw(Primitive.Triangles, 3);
 		
 
 		context.flip();
