@@ -33,7 +33,7 @@ class GameLogic {
 			}
 		}
 
-		world.playerShip.velocity[]	+=getRect(inputThrust/15,world.playerShip.rot)[];
+		world.playerShip.velocity[]	+=getRect(inputThrust/10,world.playerShip.rot)[];
 		world.playerShip.torque	+=inputTorque/20*TAU;
 		
 		world.playerShip.rot += world.playerShip.torque*timeDelta;
