@@ -6,6 +6,7 @@ enum EventType: ubyte {
 	thrust,
 	torque,
 	rotateGun,
+	fire,
 }
 
 struct GameEvent {
@@ -14,6 +15,7 @@ struct GameEvent {
 		ThrustEvent	thrust	;
 		TorqueEvent	torque	;
 		RotateGunEvent	rotateGun	;
+		FireEvent	fireGun	;
 	}
 }
 
@@ -25,4 +27,6 @@ struct TorqueEvent {
 }
 struct RotateGunEvent {
 	float angle;
+}
+struct FireEvent {
 }

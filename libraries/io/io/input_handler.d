@@ -121,6 +121,19 @@ class InputHandler {
 					}
 				}
 			}
+			{
+				if (event.type == event.Type.KEY_DOWN) {
+					with (event.key) {
+						if (keycode == Keycode.SPACE) {
+							GameEvent gameEvent;
+							{
+								gameEvent.type = EventType.fire;
+							}
+							gameEvents ~= gameEvent;
+						}
+					}
+				}
+			}
 		}
 
 		if ((keysDown.rotateGunLeft?1:0)+(keysDown.rotateGunRight?-1:0)!=0) {
