@@ -48,6 +48,7 @@ subPackage {
 			
 	dependency	"derelict-gl3"	version="~>2.0.0-beta.6"
 	dependency	"cst"	version="~>1.0.4"
+	dependency	"xyz"	version="~>1.0.0"
 	dependency	"llist"	version="~>2.0.0"
 			
 	dependency	"polar-rect-math"	version="~>1.0.0-beta.0"
