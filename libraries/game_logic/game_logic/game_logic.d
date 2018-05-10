@@ -3,6 +3,7 @@ module game_logic.game_logic;
 import llist.slist;
 import objects.world;
 import objects.ship;
+import objects.bullet;
 import game_events.game_event;
 import math.tau;
 import math.polar_rect;
@@ -30,6 +31,14 @@ class GameLogic {
 			}
 			else if (event.type == EventType.rotateGun) {
 				world.playerShip.gunDirection += event.rotateGun.angle*timeDelta;
+			}
+			else if (event.type == EventType.fire) {
+				float[2] mov;
+				mov = world.playerShip.velocity[] + getRect(0.1f,world.playerShip.gunDirection)[];
+				auto node = world.bullets;
+				while (node.next!=null)
+					node=node.next;
+				node.append(new Bullet(world.playerShip.pos, world.playerShip.gunDirection, mov));
 			}
 		}
 
