@@ -53,7 +53,7 @@ class GameLogic {
 		foreach (bulletNode; world.bullets.iterator) {
 			bulletNode.value.pos[] += bulletNode.value.velocity[]*timeDelta;
 			foreach (shipNode; world.ships.iterator) {
-				if (shipNode.value.pos.distance(bulletNode.value.pos) < 1) {
+				if (shipNode.value.pos.distance(bulletNode.value.pos) < 0.2) {
 					import std.stdio;
 					writeln("Collition!");
 				}
