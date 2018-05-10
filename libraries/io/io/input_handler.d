@@ -1,5 +1,6 @@
 module io.input_handler;
 
+import cst_;
 import std.stdio;
 
 import clay_sdl.event;
@@ -24,6 +25,8 @@ class InputHandler {
 		GameEvent[] gameEvents;
 
 		foreach (event; eventQueue) {
+			bool thrustChanged	= false;
+			bool torqueChanged	= false;
 			if (event.type == event.Type.QUIT) {
 				"Quit".writeln;
 			}
@@ -39,11 +42,9 @@ class InputHandler {
 			}
 			else if (event.type == event.Type.KEY_DOWN) {
 				with (event.key) {
-					bool thrustChanged	= false;
-					bool torgueChanged	= false;
 					if (keycode == Keycode.LEFT) {
 						keysDown.left	= true;
-						torqudChanged	= true;
+						torqueChanged	= true;
 					}
 					else if (keycode == Keycode.RIGHT) {
 						keysDown.right	= true;
@@ -55,26 +56,47 @@ class InputHandler {
 					}
 					else if (keycode == Keycode.DOWN) {
 						keysDown.down	= true;
-						thustChanged	= true;
+						thrustChanged	= true;
 					}
 					
-					if (torqueChanged) {
-						GameEvent gameEvent;
-						{
-							gameEvent.type = EventType.torque;
-							gameEvent.torque.torque = keyDown.right-keysDown.left;
-						}
-						gameEvents ~= gameEvent;
-					}
-					if (torqueChanged) {
-						GameEvent gameEvent;
-						{
-							gameEvent.type = EventType.thrust;
-							gameEvent.thrust.thrust = keyDown.up-keysDown.down;
-						}
-						gameEvents ~= gameEvent;
-					}
 				}
+			}
+			else if (event.type == event.Type.KEY_UP) {
+				with (event.key) {
+					if (keycode == Keycode.LEFT) {
+						keysDown.left	= false;
+						torqueChanged	= true;
+					}
+					else if (keycode == Keycode.RIGHT) {
+						keysDown.right	= false;
+						torqueChanged	= true;
+					}
+					else if (keycode == Keycode.UP) {
+						keysDown.up	= false;
+						thrustChanged	= true;
+					}
+					else if (keycode == Keycode.DOWN {
+						keysDown.down	= false;
+						thrustChanged	= true;
+					}
+
+				}
+			}
+			if (torqueChanged) {
+				GameEvent gameEvent;
+				{
+					gameEvent.type = EventType.torque;
+					gameEvent.torque.torque = (keysDown.right?-1:0)+(keysDown.left?1:0);
+				}
+				gameEvents ~= gameEvent;
+			}
+			if (thrustChanged) {
+				GameEvent gameEvent;
+				{
+					gameEvent.type = EventType.thrust;
+					gameEvent.thrust.thrust = (keysDown.up?1:0)+(keysDown.down?-1:0);
+				}
+				gameEvents ~= gameEvent;
 			}
 		}
 		
