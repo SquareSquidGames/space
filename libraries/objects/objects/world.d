@@ -5,14 +5,18 @@ module objects.world;
 import llist.slist	;
 import objects.player_ship	;
 import objects.ship	;
+import objects.bullet	;
 
 class World {
 	PlayerShip playerShip;
 	
 	Node!Ship* ships;
+
+	Node!Bullet* bullet;
 	
 	this() {
 		playerShip = new PlayerShip;
 		ships = new Node!Ship;
+		bullet = new Node!Bullet;
 	}
 }
