@@ -75,7 +75,7 @@ class InputHandler {
 						keysDown.up	= false;
 						thrustChanged	= true;
 					}
-					else if (keycode == Keycode.DOWN {
+					else if (keycode == Keycode.DOWN) {
 						keysDown.down	= false;
 						thrustChanged	= true;
 					}
