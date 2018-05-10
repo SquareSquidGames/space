@@ -14,3 +14,11 @@ built/space-test-*
 *.lst
 
 \.vs/
+
+built/space_game_events\.lib
+
+built/space_game_logic\.lib
+
+built/space_io\.lib
+
+built/space_objects\.lib
