@@ -7,6 +7,8 @@ import objects.bullet;
 import game_events.game_event;
 import math.tau;
 import math.polar_rect;
+import xyz;
+import std.math;
 
 class GameLogic {
 	World world;
@@ -47,8 +49,24 @@ class GameLogic {
 		world.playerShip.rot += world.playerShip.torque*timeDelta;
 		world.playerShip.pos[] += world.playerShip.velocity[]*timeDelta;
 		
+		Node!Bullet* lastNode;
 		foreach (bulletNode; world.bullets.iterator) {
 			bulletNode.value.pos[] += bulletNode.value.velocity[]*timeDelta;
+			foreach (shipNode; world.ships.iterator) {
+				if (shipNode.value.pos.distance(bulletNode.value.pos) < 1) {
+					import std.stdio;
+					writeln("Collition!");
+				}
+			}
 		}
 	}
+	
+	
+}
+
+
+float distance(float[2] point1, float[2]  point2) {
+	float[2] d = point1[]-point2[];
+	float distance = sqrt(d.x*d.x + d.y*d.y);
+	return distance;
 }
