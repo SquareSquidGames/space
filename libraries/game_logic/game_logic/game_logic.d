@@ -18,9 +18,9 @@ class GameLogic {
 	
 	this(World world) {
 		this.world = world;
-		world.ships.append(new Ship([0,-3],0));
-		world.ships.insertAfter(new Ship([2,2],0.5*TAU));
-		world.ships.insertAfter(new Ship([-2,1],0.1*TAU));
+		world.ships = new Node!Ship(world.ships	, new Ship([0,-3],0)	);
+		world.ships = new Node!Ship(world.ships	, new Ship([2,2],0.5*TAU)	);
+		world.ships = new Node!Ship(world.ships	, new Ship([-2,1],0.1*TAU)	);
 	}
 	
 	void update(GameEvent[] gameEvents, float timeDelta) {
@@ -36,10 +36,7 @@ class GameLogic {
 			}
 			else if (event.type == EventType.fire) {
 				float[2] mov = world.playerShip.velocity[] + getRect(2f,world.playerShip.gunDirection)[];
-				auto node = world.bullets;
-				while (node.next!=null)
-					node=node.next;
-				node.append(new Bullet(world.playerShip.pos, world.playerShip.gunDirection, mov));
+				world.bullets = new Node!Bullet(world.bullets	, new Bullet(world.playerShip.pos, world.playerShip.gunDirection, mov)	);
 			}
 		}
 

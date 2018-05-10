@@ -34,7 +34,7 @@ subPackage {
 	importPaths	"libraries/game_events"
 	
 	dependency	"cst"	version="~>1.0.4"
-	dependency	"llist"	version="~>2.0.0"
+	dependency	"llist"	version="~>3.0.0-alpha"
 }
 subPackage {
 	name	"game_logic"
