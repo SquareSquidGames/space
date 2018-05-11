@@ -46,15 +46,15 @@ class GameLogic {
 		world.playerShip.rot += world.playerShip.torque*timeDelta;
 		world.playerShip.pos[] += world.playerShip.velocity[]*timeDelta;
 		
-		Node!Bullet* lastNode;
+		Node!Bullet** lastBulletNode = &world.bullets;
 		foreach (bulletNode; world.bullets.iterator) {
 			bulletNode.value.pos[] += bulletNode.value.velocity[]*timeDelta;
 			foreach (shipNode; world.ships.iterator) {
 				if (shipNode.value.pos.distance(bulletNode.value.pos) < 0.2) {
-					import std.stdio;
-					writeln("Collition!");
+					*lastBulletNode = bulletNode.next;
 				}
 			}
+			lastBulletNode = &bulletNode.next;
 		}
 	}
 	
