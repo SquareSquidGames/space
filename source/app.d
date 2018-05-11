@@ -3,7 +3,7 @@ import core.thread;
 import core.time : msecs;
 
 import cst_;
-import llist.slist;
+import linked.destructive_node;
 
 import game_logic.game_logic;
 import io.renderer;

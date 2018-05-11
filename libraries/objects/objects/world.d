@@ -2,7 +2,8 @@
 */
 module objects.world;
 
-import llist.slist	;
+import linked.destructive_node	;
+import linked.no_sent_node_funs	;
 import objects.player_ship	;
 import objects.ship	;
 import objects.bullet	;
