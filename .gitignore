@@ -22,3 +22,5 @@ built/space_game_logic\.lib
 built/space_io\.lib
 
 built/space_objects\.lib
+
+built/space_linked\.lib
