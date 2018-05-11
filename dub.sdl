@@ -21,7 +21,7 @@ subPackage {
 	importPaths	"libraries/objects"
 	
 	dependency	"cst"	version="~>1.0.4"
-	dependency	"llist"	version="~>2.0.0"
+	dependency	"space:linked"	version="*"
 			
 	dependency	"polar-rect-math"	version="~>1.0.0-beta.0"
 	dependency	"tau"	version="~>1.0.0"
@@ -34,7 +34,7 @@ subPackage {
 	importPaths	"libraries/game_events"
 	
 	dependency	"cst"	version="~>1.0.4"
-	dependency	"llist"	version="~>3.0.0-alpha"
+	dependency	"space:linked"	version="*"
 }
 subPackage {
 	name	"game_logic"
@@ -49,7 +49,7 @@ subPackage {
 	dependency	"derelict-gl3"	version="~>2.0.0-beta.6"
 	dependency	"cst"	version="~>1.0.4"
 	dependency	"xyz"	version="~>1.0.0"
-	dependency	"llist"	version="~>2.0.0"
+	dependency	"space:linked"	version="*"
 			
 	dependency	"polar-rect-math"	version="~>1.0.0-beta.0"
 	dependency	"tau"	version="~>1.0.0"
@@ -65,7 +65,7 @@ subPackage {
 	dependency	"space:game_events"	version="*"
 			
 	dependency	"cst"	version="~>1.0.4"
-	dependency	"llist"	version="~>2.0.0"
+	dependency	"space:linked"	version="*"
 			
 	dependency	"polar-rect-math"	version="~>1.0.0-beta.0"
 	dependency	"tau"	version="~>1.0.0"
@@ -88,8 +88,20 @@ subPackage {
 	dependency	"space:game_events"	version="*"
 			
 	dependency	"cst"	version="~>1.0.4"
-	dependency	"llist"	version="~>2.0.0"
+	dependency	"space:linked"	version="*"
 			
 	dependency	"polar-rect-math"	version="~>1.0.0-beta.0"
 	dependency	"tau"	version="~>1.0.0"
 }
+
+
+
+
+subPackage {
+	name	"linked"
+	targetType	"library"
+	targetPath	"built"
+	sourcePaths	"libraries/linked"
+	importPaths	"libraries/linked"
+}
+
