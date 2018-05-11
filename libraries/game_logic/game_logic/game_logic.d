@@ -10,21 +10,23 @@ import math.tau;
 import math.polar_rect;
 import xyz;
 import std.math;
+import game_logic.scenario_handler;
 
 class GameLogic {
 	World world;
+	ScenarioHandler scenarioHandler;
 	
 	float inputThrust=0;
 	float inputTorque=0;
 	
 	this(World world) {
-		this.world = world;
-		world.ships = new Node!Ship(world.ships	, new Ship([0,-3],0)	);
-		world.ships = new Node!Ship(world.ships	, new Ship([2,2],0.5*TAU)	);
-		world.ships = new Node!Ship(world.ships	, new Ship([-2,1],0.1*TAU)	);
+		this.world	= world;
+		this.scenarioHandler	= new ScenarioHandler(world);
 	}
 	
 	void update(GameEvent[] gameEvents, float timeDelta) {
+		scenarioHandler.update(timeDelta);
+		
 		foreach (event; gameEvents) {
 			if (event.type == EventType.thrust) {
 				inputThrust = event.thrust.thrust;
