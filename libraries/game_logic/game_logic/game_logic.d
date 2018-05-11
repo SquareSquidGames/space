@@ -11,10 +11,12 @@ import math.polar_rect;
 import xyz;
 import std.math;
 import game_logic.scenario_handler;
+import game_logic.ship_ai_handler;
 
 class GameLogic {
 	World world;
 	ScenarioHandler scenarioHandler;
+	ShipAiHandler shipAiHandler;
 	
 	float inputThrust=0;
 	float inputTorque=0;
@@ -22,6 +24,7 @@ class GameLogic {
 	this(World world) {
 		this.world	= world;
 		this.scenarioHandler	= new ScenarioHandler(world);
+		this.shipAiHandler	= new ShipAiHandler(world);
 	}
 	
 	void update(GameEvent[] gameEvents, float timeDelta) {
@@ -58,6 +61,12 @@ class GameLogic {
 				}
 			}
 			lastBulletNextPtr = &bulletNode.next();
+		}
+		foreach (shipNode; world.ships.iterator) {
+			shipAiHandler.handleShip(shipNode.value);
+			shipNode.value.rot	+= shipNode.value.torque*timeDelta;
+			shipNode.value.pos[]	+= shipNode.value.velocity[]*timeDelta;
+			break;
 		}
 	}
 	
