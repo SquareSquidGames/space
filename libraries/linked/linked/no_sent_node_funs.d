@@ -9,46 +9,42 @@ import std.traits : hasMember;
 
 
 public {
-	@property bool empty(T, N)(N!T* node) if(mixin(constrain)) {
+	@property bool empty(N)(N* node) if(mixin(constrain)){
 		return (node is null);
 	}
 }
 public {
-	N!T dup(T, N)(N!T* node) if(mixin(constrain)) {
-		return new N!T(node.next, node.payload);
+	N dup(N)(N* node) if(mixin(constrain)) {
+		return new N(node.next, node.payload);
 	}
 }
 public {
-	void removeNext(T, N)(N!T* node) if(mixin(constrain)) {
+	void removeNext(N)(N* node) if(mixin(constrain)) {
 		assert(!node.empty);
 		node.next = node.next.next;
 	}
-	void insertAfter(T, N)(N!T* node, N!T* newNode) if(mixin(constrain)) {
+	void insertAfter(N)(N* node, N* newNode) if(mixin(constrain)) {
 		newNode.next	= node.next;
 		node.next	= newNode;
 	}
-	void insertAfter(T, N)(N!T* node, T value) if(mixin(constrain)) {
-		node.insertAfter(new N!T(null, value));
-	}
-	void redirect(T, N)(N!T* node, N!T* newNode) if(mixin(constrain)) {
+	void redirect(N)(N* node, N* newNode) if(mixin(constrain)) {
 		node.next = newNode;
 	}
 }
-
 public {
-	Iterator!T iterator(T, N)(N!T* node)  if(mixin(constrain)) {
-		return Iterator!T(node);
+	Iterator!(N) iterator(N)(N* node) if(mixin(constrain)){
+		return Iterator!(N)(node);
 	}
-	private struct Iterator(T, N) if(mixin(constrain)) {
-		private N!T* node;
+	private struct Iterator(N) if(mixin(constrain)){
+		private N* node;
 		@disable this();
-		this(N!T* node) {
+		this(N* node) {
 			this.node = node;
 		}
 		@property bool empty() {
 			return node.empty;
 		}
-		@property N!T* front() {
+		@property N* front() {
 			assert(!empty);
 			return node;
 		}
@@ -97,6 +93,6 @@ unittest {
 
 
 
-private enum constrain = "hasMember!(N!T,\"next\")&&is(typeof(N!T.next:N!T*) && hasMember!(N!T,\"payload\")&&is(typeof(N!T.payload:T)";
+private enum constrain = "hasMember!(N,\"next\")&&is(typeof(N.next):N*) && hasMember!(N,\"payload\")";
 
 
