@@ -9,8 +9,8 @@ license "proprietary"
 dependency	":objects"	version="*"
 dependency	":game_events"	version="*"
 dependency	":game_logic"	version="*"
-////dependency	":io"	version="*"
-dependency	":debug_io"	version="*"
+dependency	":io"	version="*"
+////dependency	":debug_io"	version="*"
 
 
 subPackage {
@@ -20,11 +20,11 @@ subPackage {
 	sourcePaths	"libraries/objects"
 	importPaths	"libraries/objects"
 	
-	dependency	"cst"	version="~>1.0.4"
+	dependency	"cst"	version="~>1.0"
 	dependency	"space:linked"	version="*"
 			
 	dependency	"polar-rect-math"	version="~>1.0.0-beta.0"
-	dependency	"tau"	version="~>1.0.0"
+	dependency	"tau"	version="~>1.0"
 }
 subPackage {
 	name	"game_events"
@@ -47,12 +47,12 @@ subPackage {
 	dependency	"space:game_events"	version="*"
 			
 	dependency	"derelict-gl3"	version="~>2.0.0-beta.6"
-	dependency	"cst"	version="~>1.0.4"
-	dependency	"xyz"	version="~>1.0.0"
+	dependency	"cst"	version="~>1.0"
+	dependency	"xyz"	version="~>1.1"
 	dependency	"space:linked"	version="*"
 			
 	dependency	"polar-rect-math"	version="~>1.0.0-beta.0"
-	dependency	"tau"	version="~>1.0.0"
+	dependency	"tau"	version="~>1.0"
 }
 subPackage {
 	name	"io"
@@ -64,11 +64,11 @@ subPackage {
 	dependency	"space:objects"	version="*"
 	dependency	"space:game_events"	version="*"
 			
-	dependency	"cst"	version="~>1.0.4"
+	dependency	"cst"	version="~>1.0"
 	dependency	"space:linked"	version="*"
 			
 	dependency	"polar-rect-math"	version="~>1.0.0-beta.0"
-	dependency	"tau"	version="~>1.0.0"
+	dependency	"tau"	version="~>1.0"
 	
 	dependency	"derelict-gl3"	version="~>2.0.0-beta.6"
 	dependency	"derelict-sdl2"	version="~>3.1.0-alpha.3"
@@ -87,11 +87,11 @@ subPackage {
 	dependency	"space:objects"	version="*"
 	dependency	"space:game_events"	version="*"
 			
-	dependency	"cst"	version="~>1.0.4"
+	dependency	"cst"	version="~>1.0"
 	dependency	"space:linked"	version="*"
 			
 	dependency	"polar-rect-math"	version="~>1.0.0-beta.0"
-	dependency	"tau"	version="~>1.0.0"
+	dependency	"tau"	version="~>1.0"
 }
 
 
