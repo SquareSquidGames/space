@@ -1,4 +1,4 @@
-module linked.nosent_node_funs;
+module linked.no_sent_node_funs;
 
 import std.traits : hasMember;
 
