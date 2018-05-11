@@ -12,7 +12,9 @@ import glwt.viewport;
 import glwt.clear;
 import gl_context;
 
-import llist.slist;
+
+import linked.destructive_node	;
+import linked.no_sent_node_funs	;
 import objects.world;
 import game_events.game_event;
 

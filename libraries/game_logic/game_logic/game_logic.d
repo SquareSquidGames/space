@@ -1,6 +1,7 @@
 module game_logic.game_logic;
 
-import llist.slist;
+import linked.destructive_node ;
+import linked.no_sent_node_funs ;
 import objects.world;
 import objects.ship;
 import objects.bullet;
@@ -46,15 +47,15 @@ class GameLogic {
 		world.playerShip.rot += world.playerShip.torque*timeDelta;
 		world.playerShip.pos[] += world.playerShip.velocity[]*timeDelta;
 		
-		Node!Bullet** lastBulletNode = &world.bullets;
-		foreach (bulletNode; world.bullets.iterator) {
+		Node!Bullet** lastBulletNextPtr = &world.bullets;
+		foreach (Node!Bullet* bulletNode; world.bullets.iterator) {
 			bulletNode.value.pos[] += bulletNode.value.velocity[]*timeDelta;
 			foreach (shipNode; world.ships.iterator) {
 				if (shipNode.value.pos.distance(bulletNode.value.pos) < 0.2) {
-					*lastBulletNode = bulletNode.next;
+					*lastBulletNextPtr = bulletNode.next;
 				}
 			}
-			lastBulletNode = &bulletNode.next;
+			lastBulletNextPtr = &bulletNode.next();
 		}
 	}
 	
