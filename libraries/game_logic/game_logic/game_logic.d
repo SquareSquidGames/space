@@ -66,7 +66,6 @@ class GameLogic {
 			shipAiHandler.handleShip(shipNode.value);
 			shipNode.value.rot	+= shipNode.value.torque*timeDelta;
 			shipNode.value.pos[]	+= shipNode.value.velocity[]*timeDelta;
-			break;
 		}
 	}
 	
