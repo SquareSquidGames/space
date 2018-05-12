@@ -5,5 +5,7 @@ struct Node(T) {
 
 	T payload;
 	alias value = payload;
+	
+	alias payload this;
 }
 

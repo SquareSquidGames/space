@@ -13,8 +13,13 @@ struct Node(T) if(hasMember!(T,"removed")&&is(typeof(T.removed):bool)) {
 		}
 		return _next;
 	}
+	@property void next(Node!T* newNext) {
+		_next = newNext;
+	}
 	
 	T payload;
 	alias value = payload;
+	
+	alias payload this;
 }
 
